@@ -1,0 +1,123 @@
+package com.api.memoriaviva.entity;
+
+import com.api.memoriaviva.dto.PostDTO;
+import com.api.memoriaviva.enums.Category;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+/**
+ * Esta é a entidade gerenciada pelo JPA que representa a tabela de postagens no banco de dados.
+ */
+
+@Entity //Indica que classe representa uma entidade
+@Table(name = "posts") //Define o nome da tabela no banco de dados
+public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, length = 30)
+    private String title;
+    @Column(nullable = false, length = 200)
+    private String description;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Category category;
+    @Column(nullable = false)
+    private boolean sensitiveContent;
+    private String imgUrl;
+    private LocalDate datePost;
+    private LocalTime hourPost;
+
+    //Construtor padrão
+    public Post() {
+    }
+
+    //Construtor padrão
+    public Post(Long id, String title, String description, Category category, boolean sensitiveContent, String imgUrl, LocalDate datePost, LocalTime hourPost) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.category = category;
+        this.sensitiveContent = sensitiveContent;
+        this.imgUrl = imgUrl;
+        this.datePost = datePost;
+        this.hourPost = hourPost;
+    }
+
+    //Construtor que recebe um objeto PostDTO
+    public Post(PostDTO postDTO) {
+        title = postDTO.getTitle();
+        description = postDTO.getDescription();
+        category = postDTO.getCategory();
+        sensitiveContent = postDTO.isSensitiveContent();
+        imgUrl = postDTO.getImgUrl();
+        datePost = postDTO.getDatePost();
+        hourPost = postDTO.getHourPost();
+    }
+
+    /**
+     * Encapsulamento
+     * A partir daqui os atributos privados são acessados soemente por métodos públicos.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public boolean isSensitiveContent() {
+        return sensitiveContent;
+    }
+
+    public void setSensitiveContent(boolean sensiveContent) {
+        this.sensitiveContent = sensiveContent;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public LocalDate getDatePost() {
+        return datePost;
+    }
+
+    public void setDatePost(LocalDate datePost) {
+        this.datePost = datePost;
+    }
+
+    public LocalTime getHourPost() {
+        return hourPost;
+    }
+
+    public void setHourPost(LocalTime hourPost) {
+        this.hourPost = hourPost;
+    }
+}
