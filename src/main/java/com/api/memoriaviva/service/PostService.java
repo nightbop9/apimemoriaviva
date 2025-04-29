@@ -65,6 +65,7 @@ public class PostService {
     	post.setTitle(postDTO.getTitle());
     	post.setDescription(postDTO.getDescription());
     	post.setCategory(postDTO.getCategory());
+		post.setEmoji(postDTO.getEmoji());
     	post.setSensitiveContent(postDTO.isSensitiveContent());;
     	post.setImgUrl(postDTO.getImgUrl());
 		repository.save(post);

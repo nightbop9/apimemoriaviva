@@ -2,6 +2,7 @@ package com.api.memoriaviva.dto;
 
 import com.api.memoriaviva.entity.Post;
 import com.api.memoriaviva.enums.Category;
+import com.api.memoriaviva.enums.Emoji;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,8 @@ public class PostDTO {
     private String description;
     @NotNull(message = "Escolha uma categoria.")
     private Category category;
+    @NotNull(message = "Escolha um emoji.")
+    private Emoji emoji;
     private boolean sensitiveContent;
     private String imgUrl;
     private LocalDate datePost;
@@ -32,12 +35,13 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(Long id, String title, String description, Category category, boolean sensiveContent, String imgUrl, LocalDate datePost, LocalTime hourPost) {
+    public PostDTO(Long id, String title, String description, Category category, Emoji emoji, boolean sensitiveContent, String imgUrl, LocalDate datePost, LocalTime hourPost) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.category = category;
-        this.sensitiveContent = sensiveContent;
+        this.emoji = emoji;
+        this.sensitiveContent = sensitiveContent;
         this.imgUrl = imgUrl;
         this.datePost = datePost;
         this.hourPost = hourPost;
@@ -48,6 +52,7 @@ public class PostDTO {
         title = post.getTitle();
         description = post.getDescription();
         category = post.getCategory();
+        emoji = post.getEmoji();
         sensitiveContent = post.isSensitiveContent();
         imgUrl = post.getImgUrl();
         datePost = post.getDatePost();
@@ -80,6 +85,14 @@ public class PostDTO {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Emoji getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(Emoji emoji) {
+        this.emoji = emoji;
     }
 
     public boolean isSensitiveContent() {
