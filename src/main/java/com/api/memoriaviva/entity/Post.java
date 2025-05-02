@@ -2,6 +2,7 @@ package com.api.memoriaviva.entity;
 
 import com.api.memoriaviva.dto.PostDTO;
 import com.api.memoriaviva.enums.Category;
+import com.api.memoriaviva.enums.Emoji;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,33 +18,37 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 25)
     private String title;
     @Column(nullable = false, length = 200)
     private String description;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Category category;
+    Category category;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Emoji emoji;
     @Column(nullable = false)
     private boolean sensitiveContent;
     private String imgUrl;
     private LocalDate datePost;
-    private LocalTime hourPost;
+    private LocalTime hourModifiedPost;
 
     //Construtor padrão
     public Post() {
     }
 
     //Construtor padrão
-    public Post(Long id, String title, String description, Category category, boolean sensitiveContent, String imgUrl, LocalDate datePost, LocalTime hourPost) {
-        this.id = id;
+    public Post(String title, String description, Category category, Emoji emoji, boolean sensitiveContent,
+                String imgUrl, LocalDate datePost, LocalTime hourModifiedPost) {
         this.title = title;
         this.description = description;
         this.category = category;
+        this.emoji = emoji;
         this.sensitiveContent = sensitiveContent;
         this.imgUrl = imgUrl;
         this.datePost = datePost;
-        this.hourPost = hourPost;
+        this.hourModifiedPost = hourModifiedPost;
     }
 
     //Construtor que recebe um objeto PostDTO
@@ -51,10 +56,11 @@ public class Post {
         title = postDTO.getTitle();
         description = postDTO.getDescription();
         category = postDTO.getCategory();
+        emoji = postDTO.getEmoji();
         sensitiveContent = postDTO.isSensitiveContent();
         imgUrl = postDTO.getImgUrl();
         datePost = postDTO.getDatePost();
-        hourPost = postDTO.getHourPost();
+        hourModifiedPost = postDTO.getHourModifiedPost();
     }
 
     /**
@@ -89,6 +95,14 @@ public class Post {
         this.category = category;
     }
 
+    public Emoji getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(Emoji emoji) {
+        this.emoji = emoji;
+    }
+
     public boolean isSensitiveContent() {
         return sensitiveContent;
     }
@@ -113,11 +127,11 @@ public class Post {
         this.datePost = datePost;
     }
 
-    public LocalTime getHourPost() {
-        return hourPost;
+    public LocalTime getHourModifiedPost() {
+        return hourModifiedPost;
     }
 
-    public void setHourPost(LocalTime hourPost) {
-        this.hourPost = hourPost;
+    public void setHourModifiedPost(LocalTime hourModifiedPost) {
+        this.hourModifiedPost = hourModifiedPost;
     }
 }

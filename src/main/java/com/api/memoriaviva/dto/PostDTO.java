@@ -2,6 +2,7 @@ package com.api.memoriaviva.dto;
 
 import com.api.memoriaviva.entity.Post;
 import com.api.memoriaviva.enums.Category;
+import com.api.memoriaviva.enums.Emoji;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,30 +18,34 @@ import java.time.LocalTime;
 public class PostDTO {
     private Long id;
     @NotBlank(message = "O título é obrigatório.")
-    @Size(min = 5, max = 30, message = "O título deve ter entre 5 e 30 caracteres.")
+    @Size(min = 5, max = 25, message = "O título deve ter entre 5 e 25 caracteres.")
     private String title;
     @NotBlank(message = "A descrição é obrigatória.")
     @Size(min = 20, max = 200, message = "A descrição deve ter entre 20 e 200 caracteres.")
     private String description;
     @NotNull(message = "Escolha uma categoria.")
     private Category category;
+    @NotNull(message = "Escolha um emoji.")
+    private Emoji emoji;
     private boolean sensitiveContent;
     private String imgUrl;
     private LocalDate datePost;
-    private LocalTime hourPost;
+    private LocalTime hourModifiedPost;
 
     public PostDTO() {
     }
 
-    public PostDTO(Long id, String title, String description, Category category, boolean sensiveContent, String imgUrl, LocalDate datePost, LocalTime hourPost) {
+    public PostDTO(Long id, String title, String description, Category category, Emoji emoji,
+                   boolean sensitiveContent, String imgUrl, LocalDate datePost, LocalTime hourModifiedPost) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.category = category;
-        this.sensitiveContent = sensiveContent;
+        this.emoji = emoji;
+        this.sensitiveContent = sensitiveContent;
         this.imgUrl = imgUrl;
         this.datePost = datePost;
-        this.hourPost = hourPost;
+        this.hourModifiedPost = hourModifiedPost;
     }
 
     public PostDTO(Post post) {
@@ -48,10 +53,11 @@ public class PostDTO {
         title = post.getTitle();
         description = post.getDescription();
         category = post.getCategory();
+        emoji = post.getEmoji();
         sensitiveContent = post.isSensitiveContent();
         imgUrl = post.getImgUrl();
         datePost = post.getDatePost();
-        hourPost = post.getHourPost();
+        hourModifiedPost = post.getHourModifiedPost();
     }
 
     public Long getId() {
@@ -59,7 +65,7 @@ public class PostDTO {
     }
 
     public String getTitle() {
-        return title;
+        return title.strip();
     }
 
     public void setTitle(String title) {
@@ -67,7 +73,7 @@ public class PostDTO {
     }
 
     public String getDescription() {
-        return description;
+        return description.strip();
     }
 
     public void setDescription(String description) {
@@ -80,6 +86,14 @@ public class PostDTO {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Emoji getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(Emoji emoji) {
+        this.emoji = emoji;
     }
 
     public boolean isSensitiveContent() {
@@ -106,11 +120,11 @@ public class PostDTO {
         this.datePost = datePost;
     }
 
-    public LocalTime getHourPost() {
-        return hourPost;
+    public LocalTime getHourModifiedPost() {
+        return hourModifiedPost;
     }
 
-    public void setHourPost(LocalTime hourPost) {
-        this.hourPost = hourPost;
+    public void setHourModifiedPost(LocalTime hourModifiedPost) {
+        this.hourModifiedPost = hourModifiedPost;
     }
 }

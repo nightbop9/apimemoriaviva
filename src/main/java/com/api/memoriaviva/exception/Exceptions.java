@@ -37,6 +37,4 @@ public class Exceptions {
     public ResponseEntity<Object> handler (IllegalArgumentException e) {
 		return ResponseBuilder.buildMessage(HttpStatus.NOT_FOUND, e.getMessage());
 	}
-
-
 }

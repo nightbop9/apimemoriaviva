@@ -1,17 +1,13 @@
 package com.api.memoriaviva.enums;
 
 public enum Category {
-    HAPPY, //Alegria
-    LOVE, //Amor
-    SAD, //Tristeza
-    FUNNY, //Diversão
-    FRIENDSHIP, //Amizade
-    GRATEFUL, //Gratidão
-    ADMIRATION, //Admiração
-    PEACE, //Paz
-    THOUGHT, //Pensamento
-    SURPRISE, //Surpresa
-    ANSIETY, //Ansiedade
-    ANGRY, //Raiva
-
+    FAMILY,
+    SCHOOL,        //Escola
+    WORK,          //Trabalho
+    RELATIONSHIP,  //Relacionamento
+    FRIENDS,       //Amigos
+    TRAVEL,        //Viagem
+    HOBBY,         //Hobby
+    ACHIEVEMENT,   //Conquista
+    OTHER          //Outro   
 }
