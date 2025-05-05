@@ -93,6 +93,8 @@ As memórias podem ser associadas a diferentes emoções:
 | PUT | `/post/update/{id}` | Atualiza uma memória existente |
 | DELETE | `/post/delete/{id}` | Remove uma memória |
 
+[Documentação completa da API](https://apidog.com/apidoc/shared/b0e2bfb5-5558-430b-95f9-b16b4dc028a6)
+
 ## 📊 Modelo de Dados
 
 ### Post
