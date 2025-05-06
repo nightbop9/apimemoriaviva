@@ -127,3 +127,6 @@ As memórias podem ser associadas a diferentes emoções:
 - spring-boot-starter-web
 - mysql-connector-j
 - azure-storage-blob
+
+Requer atribuição.
+Sob licença Apache License 2.0
